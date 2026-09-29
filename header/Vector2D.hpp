@@ -53,7 +53,7 @@ struct Vector2D {
     }
 
     /// Approximate equality within a tolerance.
-    [[nodiscard]] bool equals(const Vector2D& rhs, float tolerance = EPSILON) const noexcept;
+    //[[nodiscard]] bool equals(const Vector2D& rhs, float tolerance = EPSILON) const noexcept;
 
 
     // --- Operators ---------------------------------------------------------
