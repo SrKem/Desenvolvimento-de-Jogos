@@ -4,22 +4,21 @@
 [[nodiscard]] Vector2D Vector2D::normalized() const {
 
     float current_length = length();
-    /**
-     * @todo EPSILON 
-     */
-    assert(current_length > 0);
+    assert(current_length > EPSILON);
     return Vector2D(x, y) / current_length;
 }
 
 void Vector2D::normalize() {
 
     float current_length = length();
-    /**
-     * @todo EPSILON 
-     */
-    assert(current_length > 0);
+    assert(current_length > EPSILON);
     x = x / current_length;
     y = y / current_length;
+}
+
+[[nodiscard]] bool Vector2D::equals(const Vector2D& rhs, float tolerance) const noexcept {
+
+    return std::abs(x - rhs.x) <= tolerance && std::abs(y - rhs.y) <= tolerance;
 }
 
 [[nodiscard]] Vector2D Vector2D::operator+(const Vector2D& rhs) const noexcept {
@@ -37,12 +36,9 @@ void Vector2D::normalize() {
     return Vector2D(x * scalar, y * scalar);
 }
 
-[[nodiscard]] Vector2D Vector2D::operator/(float scalar) const noexcept {
+[[nodiscard]] Vector2D Vector2D::operator/(float scalar) const {
 
-    /**
-     * @todo EPSILON 
-     */
-    assert(scalar != 0);
+    assert(std::abs(scalar) > EPSILON);
     return Vector2D(x / scalar, y / scalar);
 }
 
@@ -66,10 +62,7 @@ Vector2D& Vector2D::operator*=(float scalar) noexcept {
 
 Vector2D& Vector2D::operator/=(float scalar) {
 
-    /**
-     * @todo EPSILON 
-     */
-    assert(scalar != 0);
+    assert(std::abs(scalar) > EPSILON);
     x = x / scalar;
     y = y / scalar;
    return *this;
